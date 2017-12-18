@@ -1,7 +1,7 @@
 {
   "type": "panel",
-  "name": "Grafana Plugin Template",
-  "id": "grafana-plugin-template",
+  "name": "openHistorian Data Availability Chart",
+  "id": "openhistorian-dataavailability-chart",
 
   "info": {
     "description": "Plugin Template for grafana",
