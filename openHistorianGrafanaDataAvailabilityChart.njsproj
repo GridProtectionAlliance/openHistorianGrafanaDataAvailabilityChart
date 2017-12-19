@@ -55,9 +55,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gruntfile.js">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="js\constants.js" />
   </ItemGroup>
   <ItemGroup>

@@ -1,2 +1,2 @@
-import { GrafanaPluginTemplateCtrl } from './controllers/grafanaPluginTemplate_ctrl';
-export { GrafanaPluginTemplateCtrl as PanelCtrl };
+import { OpenHistorianGrafanaDataAvailabilityChart } from './controllers/openHistorianGrafanaDataAvailabilityChart_ctrl';
+export { OpenHistorianGrafanaDataAvailabilityChart as PanelCtrl };
