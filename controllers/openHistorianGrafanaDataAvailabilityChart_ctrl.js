@@ -1,25 +1,3 @@
-//******************************************************************************************************
-//  openHistorianGrafanaDataAvailabilityChart_ctrl.ts - Gbtc
-//
-//  Copyright © 2017, Grid Protection Alliance.  All Rights Reserved.
-//
-//  Licensed to the Grid Protection Alliance (GPA) under one or more contributor license agreements. See
-//  the NOTICE file distributed with this work for additional information regarding copyright ownership.
-//  The GPA licenses this file to you under the MIT License (MIT), the "License"; you may not use this
-//  file except in compliance with the License. You may obtain a copy of the License at:
-//
-//      http://opensource.org/licenses/MIT
-//
-//  Unless agreed to in writing, the subject software distributed under the License is distributed on an
-//  "AS-IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. Refer to the
-//  License for the specific language governing permissions and limitations.
-//
-//  Code Modification History:
-//  ----------------------------------------------------------------------------------------------------
-//  12/18/2017 - Billy Ernest
-//       Generated original version of source code.
-//
-//******************************************************************************************************
 System.register(["app/plugins/sdk", "d3", "jquery", "moment"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
@@ -49,29 +27,7 @@ System.register(["app/plugins/sdk", "d3", "jquery", "moment"], function (exports
                 moment_1 = moment_1_1;
             }
         ],
-        execute: function () {//******************************************************************************************************
-            //  openHistorianGrafanaDataAvailabilityChart_ctrl.ts - Gbtc
-            //
-            //  Copyright © 2017, Grid Protection Alliance.  All Rights Reserved.
-            //
-            //  Licensed to the Grid Protection Alliance (GPA) under one or more contributor license agreements. See
-            //  the NOTICE file distributed with this work for additional information regarding copyright ownership.
-            //  The GPA licenses this file to you under the MIT License (MIT), the "License"; you may not use this
-            //  file except in compliance with the License. You may obtain a copy of the License at:
-            //
-            //      http://opensource.org/licenses/MIT
-            //
-            //  Unless agreed to in writing, the subject software distributed under the License is distributed on an
-            //  "AS-IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. Refer to the
-            //  License for the specific language governing permissions and limitations.
-            //
-            //  Code Modification History:
-            //  ----------------------------------------------------------------------------------------------------
-            //  12/18/2017 - Billy Ernest
-            //       Generated original version of source code.
-            //
-            //******************************************************************************************************
-            //import { varName } from '../js/constants'   // import constants from constant file using this format
+        execute: function () {
             OpenHistorianGrafanaDataAvailabilityChart = (function (_super) {
                 __extends(OpenHistorianGrafanaDataAvailabilityChart, _super);
                 function OpenHistorianGrafanaDataAvailabilityChart($scope, $injector, $rootScope) {
@@ -82,7 +38,6 @@ System.register(["app/plugins/sdk", "d3", "jquery", "moment"], function (exports
                     _this.events.on('render', _this.onRender.bind(_this));
                     _this.events.on('panel-initialized', _this.onPanelInitialized.bind(_this));
                     _this.events.on('data-received', _this.onDataRecieved.bind(_this));
-                    //this.events.on('data-snapshot-load', console.log('data-snapshot-load'));
                     _this.events.on('data-error', _this.onDataError.bind(_this));
                     _this.events.on('refresh', _this.onRefresh.bind(_this));
                     _this.$scope.colors = [
@@ -90,39 +45,35 @@ System.register(["app/plugins/sdk", "d3", "jquery", "moment"], function (exports
                         { Color: '#ff8c00', State: 'Available Bad Data' },
                         { Color: '#FFFFFF', State: 'Total Available Data' }
                     ];
+                    _this.$scope.data = [];
                     return _this;
                 }
-                // #region Events from Graphana Handlers
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onInitEditMode = function () {
-                    //console.log('init-edit-mode');
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onPanelTeardown = function () {
-                    //console.log('panel-teardown');
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onPanelInitialized = function () {
-                    //console.log('panel-initialized');
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onRefresh = function () {
-                    //console.log('refresh');
-                };
-                OpenHistorianGrafanaDataAvailabilityChart.prototype.onResize = function () {
-                    var ctrl = this;
-                    //console.log('refresh');
+                    if (this.height > this.row.height)
+                        this.render();
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onRender = function () {
-                    //console.log('render');
+                    console.log('render');
+                    this.buildChart(this.$scope.data);
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onDataRecieved = function (data) {
                     var _this = this;
                     this.datasource.getDataAvailability().then(function (data) {
-                        console.log(data);
+                        jquery_1.default('#da_' + _this.panel.id).off('resize');
+                        jquery_1.default('#da_' + _this.panel.id).on('resize', function (event) {
+                            _this.onRefresh();
+                        });
                         _this.$scope.data = data.data;
                         _this.buildChart(data.data);
                     });
-                    //console.log('data-recieved');
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.onDataError = function (msg) {
-                    //console.log('data-error');
                 };
                 OpenHistorianGrafanaDataAvailabilityChart.prototype.buildChart = function (data) {
                     jquery_1.default('#da_' + this.panel.id).children().remove();

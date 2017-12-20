@@ -50,6 +50,8 @@ export class OpenHistorianGrafanaDataAvailabilityChart extends MetricsPanelCtrl{
             { Color: '#ff8c00', State: 'Available Bad Data' },
             { Color: '#FFFFFF', State: 'Total Available Data'}
         ];
+        this.$scope.data = [];
+
     }
 
     // #region Events from Graphana Handlers
@@ -66,22 +68,23 @@ export class OpenHistorianGrafanaDataAvailabilityChart extends MetricsPanelCtrl{
     }
 
     onRefresh() {
-        //console.log('refresh');
-    }
-
-    onResize() {
-        var ctrl = this;
-        //console.log('refresh');
+        if (this.height > this.row.height) this.render();
     }
 
     onRender() {
-        //console.log('render');
-
+        console.log('render');
+        this.buildChart(this.$scope.data);
     }
 
     onDataRecieved(data) {
+        
         this.datasource.getDataAvailability().then((data) => {
-            console.log(data);
+            $('#da_' + this.panel.id).off('resize');
+            $('#da_' + this.panel.id).on('resize', (event) => {
+                this.onRefresh()
+            });
+
+
             this.$scope.data = data.data;
             this.buildChart(data.data);
         })
