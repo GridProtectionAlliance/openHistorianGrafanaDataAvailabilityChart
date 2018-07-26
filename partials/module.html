@@ -29,7 +29,7 @@
     }
 </style>
 <ul class="legend">
-    <li ng-repeat="c in colors"><span style='background:{{c.Color}}'></span>&nbsp;&nbsp;&nbsp;{{c.State}}</li>
+    <li ng-repeat="c in colors"><span ng-style='{"background": c.Color}'></span>&nbsp;&nbsp;&nbsp;{{c.State}}</li>
 </ul>
 
 <div id="da_{{ctrl.panel.id}}" style="width: 100%; height: 100%"></div>
